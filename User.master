@@ -1,0 +1,133 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="User.master.cs" Inherits="User" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+
+    <link href="home.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="engine1/style.css" media="screen" />
+	<style type="text/css">a#vlb{display:none}</style>
+	<script type="text/javascript" src="engine1/jquery.js"></script>
+    <style type="text/css">
+        .style2
+        {
+            width: 991px;
+            
+        }
+        .style3
+        {
+            width: 378px;
+        }
+        .style4
+        {
+            width: 533px;
+        }
+                .titlelogo {
+            width: 134px;
+            height: 130px;
+        }
+        .logo {
+            border: 2px solid;
+            width: 995px;
+            padding-bottom: 3px;
+            margin: 0 auto;
+        }
+       
+        #new{
+            width:990px;
+            padding-bottom: 3px;
+            margin: 0 auto;
+        }
+        .auto-style4 {
+            text-align: center;
+        }
+        .auto-style5 {
+            width: 1000px;
+            margin-left: 11px;
+        }
+        .auto-style6 {
+            width: 990px;
+        }
+        .masterpagetitlebox {
+            font-size:45px;
+            color: #FF0066;
+        }
+        .auto-style8 {
+            font-size: small;
+            }
+        .titletable {
+            width: 978px;
+        }
+       
+      
+        .auto-style11 {
+            height: 530px;
+        }
+        </style>
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+<div class="logo">
+
+    <table style="margin:0 auto; background-color:white" class="titletable">
+
+        <tr style="width:995px; height:50px; border-color:#5f98f3; background-color:white">
+            <td style="width:150px; text-align:right; background-color: #800000;">
+                <img src="images/Cake%20Shop%20(1).png" class="titlelogo" />
+            </td>
+           
+             <td style=" width:740px; background-color: #800000;" align="center" class="masterpagetitlebox">
+                <strong><span class="titlemst">ONLINE CAKE SHOP</span><br />
+                <span class="auto-style8">Fall In Love With Cakes</span></strong></td>
+            
+        </tr>
+        </table></div> <div id="menuu" class="auto-style6">
+        
+       
+        <table class="auto-style5" >
+            <tr>
+                <td>
+                    <asp:Button ID="Button3" runat="server" Text="HOME" CssClass="btnmenu" 
+                        CausesValidation="False" PostBackUrl="~/Home.aspx" OnClick="Button3_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="Button4" runat="server" Text="SIGN UP" CssClass="btnmenu" 
+                        CausesValidation="False" PostBackUrl="~/Register.aspx" OnClick="Button4_Click" />
+                </td>
+                <td>
+                    <asp:Button ID="Button5" runat="server" Text="LOGIN" CssClass="btnmenu" 
+                        CausesValidation="False" PostBackUrl="~/Login.aspx" OnClick="Button5_Click" />
+                </td>
+                
+                <td>
+                    <asp:Button ID="Button7" runat="server" Text="FEEDBACK" CssClass="btnmenu" 
+                        CausesValidation="False" PostBackUrl="~/Feedback.aspx" OnClick="Button7_Click" />
+                </td>
+                <td class="auto-style4">
+                    <asp:Button ID="Button8" runat="server" Text="CONTACT US" CssClass="btnmenu" 
+                        CausesValidation="False" PostBackUrl="~/contactus1.aspx" OnClick="Button8_Click" />
+                </td>
+            </tr>
+        </table>
+
+         </div>
+       
+    <div id="second1" class="auto-style11">
+       
+      
+    <div id="slide3">
+         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder></div>
+        
+        
+        
+       </div>
+
+    </form>
+</body>    
+</html>
+

@@ -1,0 +1,125 @@
+﻿
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="admin.master.cs" Inherits="admin_admin" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="admin.css" rel="stylesheet" type="text/css" />
+    <style>
+       .auto-style1 {
+            width: 127px;
+            height: 111px;
+        }
+        .logo {
+            border: 2px solid;
+            width: 995px;
+            padding-bottom: 3px;
+            margin: 0 auto;
+        }
+        .auto-style3 {
+            width: 279px;
+        }
+        .auto-style4 {
+            width: 812px;
+        }
+        .auto-style5 {
+            color: #FF1493;
+        }
+    </style>
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    </head>
+<body>
+
+    <form id="form1" runat="server">
+    <div id="header">
+
+    <table >
+
+        <tr >
+            <td style="text-align:center; background-color: #800000;" class="auto-style3">
+                <img src="../images/Cake%20Shop%20(1).png" class="auto-style1" />
+            </td>
+            <td align="center" class="auto-style4" style="background-color: #800000" >
+
+
+                <asp:Label ID="Label1" runat="server" Text="ONLINE CAKE SHOP" Font-Bold="True" 
+                    Font-Names="Copperplate Gothic Bold" ForeColor="Deeppink" Font-Size="35px"></asp:Label>
+                <br /><b><span class="auto-style5">For Cake Lovers</span> </b>
+            </td>
+            
+        </tr>
+        </table></div>
+    <div id="main">
+       
+        <div id="mnu">
+            <table class="tbl">
+                <tr>
+                    <td class="tblhead">
+                        MENU</td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="Button1" runat="server"  
+                           Text="Add Category" CssClass="mbtn"
+                            CausesValidation="False" PostBackUrl="~/admin/Addcategory.aspx" 
+                            onclick="Button1_Click" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="Button2" runat="server" CssClass="mbtn"
+                            Text="Add Item"  CausesValidation="False" 
+                            onclick="Button2_Click" PostBackUrl="~/admin/AddItem.aspx" />
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        <asp:Button ID="Button3" runat="server" CssClass="mbtn"
+                            Text="View Order"  
+                            CausesValidation="False" PostBackUrl="~/admin/VIEWORDER.aspx" OnClick="Button4_Click" />
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        <asp:Button ID="Button4" runat="server" CssClass="mbtn"
+                            Text="View User Details"  
+                            CausesValidation="False" PostBackUrl="~/admin/Viewuserdetails.aspx" OnClick="Button4_Click" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <asp:Button ID="Button7" runat="server" CssClass="mbtn"
+                            Text="Feedback"  CausesValidation="False" 
+                            onclick="Button7_Click" PostBackUrl="~/admin/FEEDBACK.aspx" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td >
+                        <asp:Button ID="Button8" runat="server" CssClass="mbtn"
+                            Text="Log Out"  CausesValidation="False" 
+                            PostBackUrl="~/Login.aspx" OnClick="Button8_Click" />
+
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    <div id="cnt"> 
+     <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </div>
+    
+       </form>
+
+
+
+</body>
+</html>
