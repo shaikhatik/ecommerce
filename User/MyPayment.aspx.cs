@@ -19,9 +19,11 @@ public partial class User_MyPayment : System.Web.UI.Page
 
             string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             SqlConnection con = new SqlConnection(connStr);
-            string sql = " Select * from PaymentMst where Uname=" + Session["uname"].ToString();
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandText = sql;
+            // string sql = " Select * from PaymentMst where Uname=" + Session["uname"].ToString();
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("PaymentMst", con);
+          //  SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandText = sql;
             cmd.Connection = con;
             using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
             {

@@ -23,7 +23,9 @@ public partial class admin_admin : System.Web.UI.Page
     {
         string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
         SqlConnection con1 = new SqlConnection(connStr);
-        SqlDataAdapter sda = new SqlDataAdapter("select * from CateMas where CName = '" + txtname.Text.ToString() + "' ", con1);
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        SqlDataAdapter sda = new SqlDataAdapter("CateMas", con1);
         DataTable dt = new DataTable();
         sda.Fill(dt);
 
@@ -36,7 +38,8 @@ public partial class admin_admin : System.Web.UI.Page
         {
             SqlConnection con = new SqlConnection(connStr);
             con.Open();
-            SqlCommand cmd = new SqlCommand("insert into CateMas(Id,CName) values(@Id,@CName)", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("insertCateMas", con);
             cmd.Parameters.AddWithValue("@Id", TextBox1.Text);
             cmd.Parameters.AddWithValue("@CName", txtname.Text);
             cmd.ExecuteNonQuery();
@@ -50,12 +53,20 @@ public partial class admin_admin : System.Web.UI.Page
     }
     public void ShowGrid()
     {
-        string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
-        SqlConnection con = new SqlConnection(connStr);
-        string sql = "SELECT * FROM CateMas";
-        SqlCommand cmd = new SqlCommand(sql, con);
-        cmd.CommandText = sql;
+        // string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
+        // SqlConnection con = new SqlConnection(connStr);
+        //// string sql = "SELECT * FROM CateMas";
+
+        // SqlCommand cmd = new SqlCommand(sql, con);
+        // cmd.CommandText = sql;
+        // cmd.Connection = con;
+
+        SqlConnection con;
+        con = new SqlConnection(ConfigurationManager.ConnectionStrings["connStr"].ConnectionString);
+        SqlCommand cmd = new SqlCommand("CateMas", con);
+        cmd.CommandType = CommandType.StoredProcedure;
         cmd.Connection = con;
+        cmd.ExecuteNonQuery();
         using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
         {
 
@@ -73,7 +84,8 @@ public partial class admin_admin : System.Web.UI.Page
         int Id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
         SqlConnection con = new SqlConnection(connStr);
         con.Open();
-        SqlCommand cmd = new SqlCommand("Delete from CateMas where Id=@1", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("DeleteCateMas", con);
         cmd.Parameters.AddWithValue("@1", Id);
         cmd.ExecuteNonQuery();
         Response.Write("<script language=javascript>alert('Deleted Successfully')</script>");
@@ -91,7 +103,9 @@ public partial class admin_admin : System.Web.UI.Page
         int Id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[100]);     
         SqlConnection con = new SqlConnection(connStr);
         con.Open();
-        SqlCommand cmd = new SqlCommand("Delete from CateMas where Id= @1", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("DeleteCateMas", con);
+        //SqlCommand cmd = new SqlCommand("Delete from CateMas where Id= @1", con);
         cmd.Parameters.AddWithValue("@1", Id);
         cmd.ExecuteNonQuery();
         Response.Write("<script language=javascript>alert('Deleted Successfully')</script>");
@@ -107,7 +121,8 @@ public partial class admin_admin : System.Web.UI.Page
         string CName = (row.FindControl("TextBox1") as TextBox).Text;
         SqlConnection con2 = new SqlConnection(connStr);
         con2.Open();
-        SqlCommand cmd = new SqlCommand("Update CateMas set  CName=@1 where Id=@2", con2);
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("UpdateCateMas, con2);
         cmd.Parameters.AddWithValue("@1",CName);
         cmd.Parameters.AddWithValue("@2", Id);
         cmd.ExecuteNonQuery();

@@ -17,7 +17,9 @@ public partial class admin_Viewuserdetails : System.Web.UI.Page
             string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             SqlConnection con = new SqlConnection(connStr);
             con.Open();
-            SqlCommand cmd = new SqlCommand("select * from UserMst", con);
+            //SqlCommand cmd = new SqlCommand("select * from UserMst", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("Usermst", con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);

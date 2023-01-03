@@ -1,0 +1,273 @@
+CREATE PROCEDURE [dbo].[CateMas]
+@id int,
+@CName varchar(50)            
+AS 
+Begin
+Set Nocount ON;
+
+----Select
+if @Action = "Select"
+Begin
+	SELECT  id, CName from CateMas
+end
+
+------Insert
+if @Action = "Insert"
+Begin
+Insert into CateMas (id,CName)
+Values(@id,@CName)
+end
+
+-----update
+if @Action = "Update"
+Begin
+Update CateMas
+Set CName = @CName where id = @id
+end
+
+-----Delete
+if @Action = "Delete"
+Begin
+Delete from CateMas
+where id = @id
+end
+end 
+
+--------------------------------------------------------------------------------------------
+CREATE PROCEDURE [dbo].[ItemMst]
+@id int,
+@IName varchar(50),
+@Details varchar(50),
+@Price  float,
+@Image bit,
+@Qnt int,
+@CName varchar(50),
+@Flavor varchar(50),
+@Egg   varchar(50)       
+AS 
+Begin
+Set Nocount ON;
+
+----Select
+if @Action = "Select"
+Begin
+	SELECT  id, IName,Details,Price,Image,Qnt,CName,Flavor,Egg from ItemMst
+end
+
+------Insert
+if @Action = "Insert"
+Begin
+Insert into ItemMst (id, IName,Details,Price,Image,Qnt,CName,Flavor,Egg)
+Values(@id, @IName,@Details,@Price,@Image,@Qnt,@CName,@Flavor,@Egg)
+end
+
+-----update
+if @Action = "Update"
+Begin
+Update ItemMst
+Set IName = @IName, Details = @Details, Price = @Price, Image = @Image,Qnt = @Qnt ,CName = @CName, Flavor = @Flavor, Egg = @Egg where id = @id
+end
+
+-----Delete
+if @Action = "Delete"
+Begin
+Delete from CateMas
+where id = @id
+end
+end 
+
+--------------------------------------------------------------------------------------------
+
+CREATE PROCEDURE [dbo].[Feedbackmst]
+@UNAME varchar(100),
+@MESSAGE varchar(50)            
+AS 
+Begin
+Set Nocount ON;
+
+----Select
+if @Action = "Select"
+Begin
+	SELECT  UNAME, MESSAGE from Feedbackmstr
+end
+
+------Insert
+if @Action = "Insert"
+Begin
+Insert into Feedbackmstr (UNAME,MESSAGE)
+Values(@UNAME,@MESSAGE)
+end
+------------------------------------------------------------------------------------------------------
+
+CREATE PROCEDURE [dbo].[Mycart]
+@id int,
+@Image bit,
+@IName varchar(50),
+@Qnt int,
+@Price  float,
+@Email varchar(50)      
+AS 
+Begin
+Set Nocount ON;
+
+----Select
+if @Action = "Select"
+Begin
+	SELECT  id, Image,IName,Qnt,Price,Email from Mycart
+end
+
+------Insert
+if @Action = "Insert"
+Begin
+Insert into ItemMst (id, Image,IName,Qnt,Price,Email)
+Values(@id, @Image,@IName,@Qnt,@Price,@Email)
+end
+
+-----update
+if @Action = "Update"
+Begin
+Update ItemMst
+Set Image = @Image, IName = @IName, Qnt = @Qnt, Price = @Price,Email = @Email  where id = @id
+end
+
+-----Delete
+if @Action = "Delete"
+Begin
+Delete from ItemMst
+where id = @id
+end
+end 
+
+--------------------------------------------------------------------------------------------
+CREATE PROCEDURE [dbo].[OrderMst]
+@id int,
+@UName varchar(50),,
+@IName varchar(50),
+@Qnt int,
+@image bit,
+@Price  float,
+@TPrice float      
+AS 
+Begin
+Set Nocount ON;
+
+----Select
+if @Action = "Select"
+Begin
+	SELECT  id, UName,IName,Qnt,image,Price,TPrice from OrderMst
+end
+
+------Insert
+if @Action = "Insert"
+Begin
+Insert into OrderMst (id, UName,IName,Qnt,image,Price,TPrice)
+Values(@id, @UName,@IName,@Qnt,@image,@Price,@TPrice)
+end
+
+-----update
+if @Action = "Update"
+Begin
+Update OrderMst
+Set UName = @UName, IName = @IName, Qnt = @Qnt,image= @image, Price = @Price,TPrice = @TPrice  where id = @id
+end
+
+-----Delete
+if @Action = "Delete"
+Begin
+Delete from OrderMst
+where id = @id
+end
+end 
+--------------------------------------------------------------------------------------------
+CREATE PROCEDURE [dbo].[PaymentMst]
+@id int,
+@Uname varchar(50),,
+@Amount varchar(50),
+@Type varchar(50),
+@Bank varchar(50),
+@Branch  varchar(50),
+@CardNo int,
+@CCV int      
+AS 
+Begin
+Set Nocount ON;
+
+----Select
+if @Action = "Select"
+Begin
+	SELECT  id, Uname,Amount,Type,Bank,Branch,CardNo,CCV from PaymentMst
+end
+
+------Insert
+if @Action = "Insert"
+Begin
+Insert into PaymentMst (id, Uname,Amount,Type,Bank,Branch,CardNo,CCV)
+Values(@id, @Uname,@Amount,@Type,@Bank,@Branch,@CardNo,@CCV)
+end
+
+-----update
+if @Action = "Update"
+Begin
+Update PaymentMst
+Set Uname = @Uname, Amount = @Amount, Type = @Type,Bank= @Bank, Branch = @Branch,CardNo = @CardNo,CCV = @CCV  where id = @id
+end
+
+-----Delete
+if @Action = "Delete"
+Begin
+Delete from PaymentMst
+where id = @id
+end
+end 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE PROCEDURE [dbo].[AdminMst]
+@id int,
+@Username varchar(50),            
+@Password varchar(50)
+AS 
+Begin
+Set Nocount ON;
+
+------Insert
+if @Action = "Insert"
+Begin
+Insert into CateMas (id,Username,Password)
+Values(@id,@Username,@Password)
+end
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE PROCEDURE [dbo].[UserMst]
+@id int,
+@Name varchar(50),            
+@lastname varchar(50),
+@Address varchar(100),
+@City (50),
+@pincode int,
+@Mobile int,
+@Email varchar(50),
+@Password varchar(50),
+@Entrydate varchar(50)
+AS 
+Begin
+Set Nocount ON;
+
+----Select
+if @Action = "Select"
+Begin
+	SELECT  id,Name,lastname,Address,City,pincode,Mobile,Email,Password,Entrydate from UserMst
+end
+
+------Insert
+if @Action = "Insert"
+Begin
+Insert into UserMst (id,Name,lastname,Address,City,pincode,Mobile,Email,Password,Entrydate)
+Values(@id,@Name,@lastname,@Address,@City,@pincode,@Mobile,@Email,@Password,@Entrydate)
+end
+
+
+-----update
+if @Action = "Update"
+Begin
+Update ItemMst
+Set Name = @Name, lastname = @lastname, Address = @Address, City = @City,pincode = @pincode,Mobile =@Mobile, Email = @Email,Password=@Password,Entrydate=@Entrydate where id = @id
+end

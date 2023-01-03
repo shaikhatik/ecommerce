@@ -23,8 +23,10 @@ public partial class User_Checkout : System.Web.UI.Page
         string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
         SqlConnection con = new SqlConnection(connStr);
         lbl.Text = "";
-        SqlDataAdapter da = new SqlDataAdapter("select TPrice from OrderMst where Id = '" + Request.QueryString["Id"] + "'", con);
-        DataTable dt = (DataTable)Session["buyitems"];
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("OrderMst", con);
+            // SqlDataAdapter da = new SqlDataAdapter("select TPrice from OrderMst where Id = '" + Request.QueryString["Id"] + "'", con);
+            DataTable dt = (DataTable)Session["buyitems"];
         da.Fill(dt);
         lblpayment.Text = dt.Rows[0]["TPrice"].ToString();
         }
@@ -40,14 +42,18 @@ public partial class User_Checkout : System.Web.UI.Page
             {
                 string Id = Convert.ToString(dt.Rows[i]["Id"]);
                 int Qnt = Convert.ToInt32(dt.Rows[i]["Qnt"]);
-                SqlDataAdapter da = new SqlDataAdapter("select Qnt from ItemMst where Id = '" + Id + "'", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd = new SqlCommand("ItemMst", con);
+                //SqlDataAdapter da = new SqlDataAdapter("select Qnt from ItemMst where Id = '" + Id + "'", con);
                 DataTable dtt = new DataTable();
                 da.Fill(dtt);
                 int quantity = Convert.ToInt32(dtt.Rows[0][0]);
                 if (quantity > 0)
                 {
                     con.Open();
-                    SqlCommand cmd = new SqlCommand(" Insert into OrderMst (Id,Uname,IName,Qnt,image,Price,TPrice) values('" + dt.Rows[i]["Id"] + "','" + Session["username"].ToString() + "','" + dt.Rows[i]["IName"]  + "','" + dt.Rows[i]["Qnt"] + "','" + dt.Rows[i]["image"] + "','" + dt.Rows[i]["Price"] + "','" + dt.Rows[i]["TPrice"]  + "')", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlCommand cmd = new SqlCommand("OrderMst", con);
+                    //SqlCommand cmd = new SqlCommand(" Insert into OrderMst (Id,Uname,IName,Qnt,image,Price,TPrice) values('" + dt.Rows[i]["Id"] + "','" + Session["username"].ToString() + "','" + dt.Rows[i]["IName"]  + "','" + dt.Rows[i]["Qnt"] + "','" + dt.Rows[i]["image"] + "','" + dt.Rows[i]["Price"] + "','" + dt.Rows[i]["TPrice"]  + "')", con);
                     cmd.ExecuteNonQuery();
                     con.Close();
                 }
@@ -71,7 +77,9 @@ public partial class User_Checkout : System.Web.UI.Page
         if (isTrue == true)
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand(" Insert into PaymentMst (Uname,Amount,Type,Bank,Branch,CardNo,CCV,EntryDate) values('" + Session["uname"].ToString() + "','" + Convert.ToDouble(lblpayment.Text) + "','" + DropDownList1.SelectedItem.Text + "','" + drpbankname.SelectedItem.Text + "','" + drpbranch.SelectedItem.Text + "','" + txtcardno.Text + "','" + Convert.ToInt32(txtccv.Text) + "','" + System.DateTime.Now + "')", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("PaymentMst", con);
+            //SqlCommand cmd = new SqlCommand(" Insert into PaymentMst (Uname,Amount,Type,Bank,Branch,CardNo,CCV,EntryDate) values('" + Session["uname"].ToString() + "','" + Convert.ToDouble(lblpayment.Text) + "','" + DropDownList1.SelectedItem.Text + "','" + drpbankname.SelectedItem.Text + "','" + drpbranch.SelectedItem.Text + "','" + txtcardno.Text + "','" + Convert.ToInt32(txtccv.Text) + "','" + System.DateTime.Now + "')", con);
             cmd.ExecuteNonQuery();
             con.Close();
         }
@@ -88,7 +96,9 @@ public partial class User_Checkout : System.Web.UI.Page
             {
                 int Id = Convert.ToInt32(dt.Rows[i]["Id"]);
                 con.Open();
-                SqlCommand cmd = new SqlCommand(" Delete from Mycart where Id = '" + Id + "' and Email = '" + Session["username"] + "' ", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlCommand cmd = new SqlCommand("Mycart", con);
+              //  SqlCommand cmd = new SqlCommand(" Delete from Mycart where Id = '" + Id + "' and Email = '" + Session["username"] + "' ", con);
                 cmd.ExecuteNonQuery();
                 con.Close();
             }

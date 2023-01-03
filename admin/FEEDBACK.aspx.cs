@@ -16,8 +16,11 @@ public partial class admin_FEEDBACK : System.Web.UI.Page
         {
             string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             SqlConnection con = new SqlConnection(connStr);
-            string sql = "SELECT * FROM Feedbackmstr";
-            SqlCommand cmd = new SqlCommand(sql, con);
+            
+            //string sql = "SELECT * FROM Feedbackmstr";
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("Feedbackmst", con);
             cmd.CommandText = sql;
             cmd.Connection = con;
             using (SqlDataAdapter sda = new SqlDataAdapter(cmd))

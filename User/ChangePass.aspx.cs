@@ -19,15 +19,19 @@ public partial class User_ChangePass : System.Web.UI.Page
         string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
         SqlConnection con = new SqlConnection(connStr);
         con.Open();
-        string sql = "SELECT * FROM UserMst where Email = '" + Session["username"] + "'";
-        SqlCommand cmd = new SqlCommand(sql, con);
+        //string sql = "SELECT * FROM UserMst where Email = '" + Session["username"] + "'";
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("Usermst", con);
+       // SqlCommand cmd = new SqlCommand(sql, con);
         SqlDataReader rd = cmd.ExecuteReader();
         if (rd.HasRows == true)
         {
             rd.Read();
             con.Close();
             con.Open();
-            cmd = new SqlCommand(" Update UserMst set Password = '" + txtcpass.Text + "' where Email = '" + Session["username"] + "'".ToString(), con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("Usermst", con);
+            //cmd = new SqlCommand(" UserMst.ToString(), con);
             cmd.ExecuteNonQuery();
             con.Close();
             lblmsg.Text = "Password changed successfully";

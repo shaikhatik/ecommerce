@@ -23,8 +23,10 @@ public partial class Login : System.Web.UI.Page
     {
         string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
         SqlConnection con = new SqlConnection(connStr);
-        string i = "select * from UserMst where Email = @Email and Password=@Password";
-        SqlCommand cmd = new SqlCommand(i, con);
+        // string i = "select * from UserMst where Email = @Email and Password=@Password";
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("UserMst", con);
+       // SqlCommand cmd = new SqlCommand(i, con);
         cmd.Parameters.AddWithValue("@Email", txtuname.Text);
         cmd.Parameters.AddWithValue("@Password", txtpass.Text);
         SqlDataAdapter sda = new SqlDataAdapter();

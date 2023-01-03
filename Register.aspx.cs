@@ -30,8 +30,10 @@ public partial class Register : System.Web.UI.Page
 
             string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             SqlConnection con = new SqlConnection(connStr);
-            string i = "insert into UserMst(Id,Name,lastname,Address,City,Pincode,Mobile,Email,Password) values(@id,@Name,@lastname,@Address,@City,@Pincode,@Mobile,@Email,@Password)";
-            SqlCommand cmd = new SqlCommand(i, con);
+            //string i = "insert into UserMst(Id,Name,lastname,Address,City,Pincode,Mobile,Email,Password) values(@id,@Name,@lastname,@Address,@City,@Pincode,@Mobile,@Email,@Password)";
+            //SqlCommand cmd = new SqlCommand(i, con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("UserMst", con);
             cmd.Parameters.AddWithValue("@id",1);
             cmd.Parameters.AddWithValue("@Name", txtname.Text);
             cmd.Parameters.AddWithValue("@lastname", txtsname.Text);
@@ -52,8 +54,10 @@ public partial class Register : System.Web.UI.Page
         bool useravailable = false;
         string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
         SqlConnection con = new SqlConnection(connStr);
-        String myquery = "Select * from UserMst where Email ='" + txtemail.Text + "'";
-        SqlCommand cmd = new SqlCommand();
+        // String myquery = "Select * from UserMst where Email ='" + txtemail.Text + "'";
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("UserMst", con);
+       // SqlCommand cmd = new SqlCommand();
         cmd.CommandText = myquery;
         cmd.Connection = con;
         SqlDataAdapter da = new SqlDataAdapter();

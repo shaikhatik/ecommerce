@@ -17,7 +17,9 @@ public partial class PRODUCT : System.Web.UI.Page
         {
             string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             SqlConnection con = new SqlConnection(connStr);
-            SqlDataAdapter sda = new SqlDataAdapter("Select * from ItemMst", con);
+            //SqlDataAdapter sda = new SqlDataAdapter("Select * from ItemMst", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("ItemMst", con);
             DataTable dt = new DataTable();
             sda.Fill(dt);
             DataList1.DataSourceID = null;

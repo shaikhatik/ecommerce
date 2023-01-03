@@ -30,7 +30,8 @@ public partial class admin_AddminItem : System.Web.UI.Page
         string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
         SqlConnection con = new SqlConnection(connStr);
         con.Open();
-        SqlCommand cmd = new SqlCommand("select * from CateMas", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("CateMas", con);
         product_cat.DataSource = cmd.ExecuteReader();
         product_cat.DataTextField = "CName";
         product_cat.DataValueField = "Id";
@@ -43,8 +44,10 @@ public partial class admin_AddminItem : System.Web.UI.Page
     {
         string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
         SqlConnection con = new SqlConnection(connStr);
-        string sql = "SELECT * FROM ItemMst";
-        SqlCommand cmd = new SqlCommand(sql, con);
+        //string sql = "SELECT * FROM ItemMst";
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("ItemMst", con);
+        //SqlCommand cmd = new SqlCommand(sql, con);
         cmd.CommandText = sql;
         cmd.Connection = con;
         using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
@@ -74,7 +77,9 @@ public partial class admin_AddminItem : System.Web.UI.Page
 
 
         con.Open();
-        SqlCommand cmd = new SqlCommand("Insert into ItemMst (Id,IName,Detail,Price,Image,Qnt,CName,Egg,Flavour)values('" + TextBox3.Text + "','" + txtiname.Text + "','" + txtdescrip.Text + "','" + Convert.ToDouble(txtprice.Text) + "','" + "~/images/" + FileUpload1.FileName + "','" + txtquan.Text + "', '" + product_cat.SelectedItem.Text + "','" + txtegg.Text + "','" + drpflav.SelectedItem.Text + "')", con);
+        //SqlCommand cmd = new SqlCommand("Insert into ItemMst (Id,IName,Detail,Price,Image,Qnt,CName,Egg,Flavour)values('" + TextBox3.Text + "','" + txtiname.Text + "','" + txtdescrip.Text + "','" + Convert.ToDouble(txtprice.Text) + "','" + "~/images/" + FileUpload1.FileName + "','" + txtquan.Text + "', '" + product_cat.SelectedItem.Text + "','" + txtegg.Text + "','" + drpflav.SelectedItem.Text + "')", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("ItemMst", con);
         cmd.ExecuteNonQuery();
         con.Close();
         ShowGrid();
@@ -96,7 +101,9 @@ public partial class admin_AddminItem : System.Web.UI.Page
         int Id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Values[0]);
         SqlConnection con = new SqlConnection(connStr);
         con.Open();
-        SqlCommand cmd = new SqlCommand("Delete from ItemMst where Id=@1", con);
+        // SqlCommand cmd = new SqlCommand("Delete from ItemMst where Id=@1", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("ItemMst", con);
         cmd.Parameters.AddWithValue("@1", Id);
         cmd.ExecuteNonQuery();
         Response.Write("<script language=javascript>alert('Deleted Successfully')</script>");
@@ -120,7 +127,9 @@ public partial class admin_AddminItem : System.Web.UI.Page
 
         SqlConnection con2 = new SqlConnection(connStr);
         con2.Open();
-        SqlCommand cmd = new SqlCommand("Update ItemMst set IName = @1, Price=@2 where Id = @3", con2);
+        //SqlCommand cmd = new SqlCommand("Update ItemMst set IName = @1, Price=@2 where Id = @3", con2);
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("ItemMst", con2);
         cmd.Parameters.AddWithValue("@1", txtiname);
         cmd.Parameters.AddWithValue("@2", txtprice);
         cmd.Parameters.AddWithValue("@3", Id);

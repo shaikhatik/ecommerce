@@ -18,10 +18,12 @@ public partial class Feedback : System.Web.UI.Page
     {
         string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             SqlConnection con = new SqlConnection(connStr);
-            con.Open();
-            SqlCommand cmd = new SqlCommand("insert into Feedbackmstr(UNAME, MESSAGE) values('" + txtname.Text.ToString() + "', '" + txtfeedback.Text + "') ", con);
+            con.Open()
+              cmd.CommandType = CommandType.StoredProcedure;
+              SqlCommand cmd = new SqlCommand("Feedbackmst", con);
+        // SqlCommand cmd = new SqlCommand("insert into Feedbackmstr(UNAME, MESSAGE) values('" + txtname.Text.ToString() + "', '" + txtfeedback.Text + "') ", con);
 
-            cmd.Parameters.AddWithValue("@UNAME", txtname.Text);
+        cmd.Parameters.AddWithValue("@UNAME", txtname.Text);
         cmd.Parameters.AddWithValue("@MESSAGE", txtfeedback.Text);
 
             cmd.ExecuteNonQuery();

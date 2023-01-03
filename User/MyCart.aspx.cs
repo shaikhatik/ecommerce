@@ -34,7 +34,9 @@ public partial class User_MyCart : System.Web.UI.Page
                     dr = dt.NewRow();
                     string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
                     SqlConnection con = new SqlConnection(connStr);
-                    SqlDataAdapter da = new SqlDataAdapter("select * from ItemMst where Id=" + Request.QueryString["Id"], con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlCommand cmd = new SqlCommand("ItemMst", con);
+                    //SqlDataAdapter da = new SqlDataAdapter("select * from ItemMst where Id=" + Request.QueryString["Id"], con);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
                     dr["Id"] = ds.Tables[0].Rows[0]["Id"].ToString();
@@ -47,7 +49,9 @@ public partial class User_MyCart : System.Web.UI.Page
                     dr["TPrice"] = Totalprice;
                     dt.Rows.Add(dr);
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("Insert into Mycart(Id,Image,IName,Qnt,Price,Email) values('" + dr["Id"] + "','" + dr["Image"] + "','" + dr["IName"] + "','" + dr["Qnt"] + "','" + dr["Price"] + "','" + Session["username"] + "')", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlCommand cmd = new SqlCommand("Mycart", con);
+                    // SqlCommand cmd = new SqlCommand("Insert into Mycart(Id,Image,IName,Qnt,Price,Email) values('" + dr["Id"] + "','" + dr["Image"] + "','" + dr["IName"] + "','" + dr["Qnt"] + "','" + dr["Price"] + "','" + Session["username"] + "')", con);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     GridView1.DataSource = dt;
@@ -63,7 +67,9 @@ public partial class User_MyCart : System.Web.UI.Page
                     dr = dt.NewRow();
                     string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
                     SqlConnection con = new SqlConnection(connStr);
-                    SqlDataAdapter da = new SqlDataAdapter("select * from ItemMst where Id=" + Request.QueryString["Id"], con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlCommand cmd = new SqlCommand("ItemMst", con);
+                    // SqlDataAdapter da = new SqlDataAdapter("select * from ItemMst where Id=" + Request.QueryString["Id"], con);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
                     dr["Id"] = ds.Tables[0].Rows[0]["Id"].ToString();
@@ -76,7 +82,9 @@ public partial class User_MyCart : System.Web.UI.Page
                     dr["TPrice"] = Totalprice;
                     dt.Rows.Add(dr);
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("Insert into Mycart(Id,Image,IName,Qnt,Price,Email) values('" + dr["Id"] + "','" + dr["Image"] + "','" + dr["IName"] + "','" + dr["Qnt"] + "','" + dr["Price"] + "','" + Session["username"] + "')", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlCommand cmd = new SqlCommand("Mycart", con);
+                    // SqlCommand cmd = new SqlCommand("Insert into Mycart(Id,Image,IName,Qnt,Price,Email) values('" + dr["Id"] + "','" + dr["Image"] + "','" + dr["IName"] + "','" + dr["Qnt"] + "','" + dr["Price"] + "','" + Session["username"] + "')", con);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     GridView1.DataSource = dt;
@@ -128,7 +136,9 @@ public partial class User_MyCart : System.Web.UI.Page
         int Id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value);
         SqlConnection con = new SqlConnection(connStr);
         con.Open();
-        SqlCommand cmd = new SqlCommand("Delete from OrderMst where Id=@Id", con);
+       // SqlCommand cmd = new SqlCommand("Delete from OrderMst where Id=@Id", con);
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("OrderMst", con);
         cmd.Parameters.AddWithValue("@Id", Id);
         cmd.ExecuteNonQuery();
         con.Close();
@@ -146,7 +156,9 @@ public partial class User_MyCart : System.Web.UI.Page
         {
             int Id = Convert.ToInt16(dt.Rows[i]["Id"]);
             int Qnt = Convert.ToInt32(dt.Rows[i]["Qnt"]);
-            SqlDataAdapter da = new SqlDataAdapter("select Qnt, Id from ItemMst where Id = '" + Id + "'", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("ItemMst", con);
+            //SqlDataAdapter da = new SqlDataAdapter("select Qnt, Id from ItemMst where Id = '" + Id + "'", con);
             DataTable dtt = new DataTable();
             da.Fill(dtt);
             int quantity = Convert.ToInt32(dtt.Rows[0][0]);

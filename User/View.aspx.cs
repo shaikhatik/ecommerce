@@ -21,7 +21,9 @@ public partial class User_vii : System.Web.UI.Page
             string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             SqlConnection con = new SqlConnection(connStr);
             string id = Request.QueryString["Id"].ToString();
-            string sql = "SELECT * FROM ItemMst where Id = '" + id + "' ";
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("ItemMst", con);
+            //string sql = "SELECT * FROM ItemMst where Id = '" + id + "' ";
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandText = sql;
             cmd.Connection = con;
@@ -46,9 +48,11 @@ public partial class User_vii : System.Web.UI.Page
             string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             SqlConnection con = new SqlConnection(connStr);
             string id = Request.QueryString["Id"].ToString();
-            string sql = "SELECT * FROM ItemMst where Id = '" + id + "' ";
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("ItemMst", con);
+            // string sql = "SELECT * FROM ItemMst where Id = '" + id + "' ";
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandText = sql;
             cmd.Connection = con;
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();

@@ -19,8 +19,10 @@ public partial class admin_login : System.Web.UI.Page
         string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
         SqlConnection con = new SqlConnection(connStr);
         string user = txtuname.Text.Trim();
-        string i = "select * from AdminMst where Username =@Username and Password=@Password";
-        SqlCommand cmd = new SqlCommand(i, con);
+        // string i = "select * from AdminMst where Username =@Username and Password=@Password";
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("Usermst", con);
+       // SqlCommand cmd = new SqlCommand(i, con);
         cmd.Parameters.AddWithValue("@Username", txtuname.Text);
         cmd.Parameters.AddWithValue("@Password", txtpass.Text);
         con.Open();

@@ -16,8 +16,10 @@ public partial class User_MyAccount : System.Web.UI.Page
         {
             string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
             SqlConnection con = new SqlConnection(connStr);
-            
-            string sql = "SELECT * FROM UserMst where Email = '" + Session["username"] + "'";
+
+            //string sql = "SELECT * FROM UserMst where Email = '" + Session["username"] + "'";
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = new SqlCommand("UserMst", con);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandText = sql;
             cmd.Connection = con;
@@ -44,7 +46,9 @@ public partial class User_MyAccount : System.Web.UI.Page
 
         string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
         SqlConnection con = new SqlConnection(connStr);
-        string i = "update UserMst Set Name = @name, lastname = @lastname, Address=@address, City = @city, Pincode = @pincode, Mobile=@mobile where Name = @name";
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("UserMst", con);
+      //  string i = "update UserMst Set Name = @name, lastname = @lastname, Address=@address, City = @city, Pincode = @pincode, Mobile=@mobile where Name = @name";
         SqlCommand cmd = new SqlCommand(i, con);
         cmd.Parameters.AddWithValue("@name", txtname.Text);
         cmd.Parameters.AddWithValue("@lastname", txtlastname.Text);
@@ -57,7 +61,9 @@ public partial class User_MyAccount : System.Web.UI.Page
         con.Open();
         cmd.ExecuteNonQuery();
         Response.Write("<script language=javascript>alert('Added Successfully')</script>");
-        string sql = "SELECT * FROM UserMst where Email = '" + Session["username"] + "'";
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("UserMst", con);
+       // string sql = "SELECT * FROM UserMst where Email = '" + Session["username"] + "'";
         SqlCommand cmd1 = new SqlCommand(sql, con);
         using (SqlDataAdapter sda = new SqlDataAdapter(cmd1))
         {
@@ -81,7 +87,9 @@ public partial class User_MyAccount : System.Web.UI.Page
         MultiView1.ActiveViewIndex = 0;
         string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
         SqlConnection con = new SqlConnection(connStr);
-        string sql = "SELECT * FROM UserMst where  Email = '" + Session["username"] + "'";
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("UserMst", con);
+       // string sql = "SELECT * FROM UserMst where  Email = '" + Session["username"] + "'";
         SqlCommand cmd = new SqlCommand(sql, con);
         cmd.CommandText = sql;
         con.Open();
@@ -105,7 +113,9 @@ public partial class User_MyAccount : System.Web.UI.Page
         MultiView1.ActiveViewIndex = 1;
         string connStr = ConfigurationManager.ConnectionStrings["connStr"].ConnectionString;
         SqlConnection con = new SqlConnection(connStr);
-        string sql = "SELECT * FROM UserMst where Email = '" + Session["username"] + "'";
+        cmd.CommandType = CommandType.StoredProcedure;
+        SqlCommand cmd = new SqlCommand("UserMst", con);
+       // string sql = "SELECT * FROM UserMst where Email = '" + Session["username"] + "'";
         SqlCommand cmd = new SqlCommand(sql, con);
         cmd.CommandText = sql;
         con.Open();
